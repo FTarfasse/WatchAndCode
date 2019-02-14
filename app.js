@@ -41,16 +41,22 @@ jQuery(function ($) {
 	var App = {
 		init: function () {
 			this.todos = util.store('todos-jquery');
-			this.todoTemplate = Handlebars.compile($('#todo-template').html());
-			this.footerTemplate = Handlebars.compile($('#footer-template').html());
+			// this.todoTemplate = Handlebars.compile($('#todo-template').html());
+      		var templateHtml = document.getElementById('todo-template').innerHTML;
+      		this.todoTemplate = Handlebars.compile(templateHtml);
+      
+			// this.footerTemplate = Handlebars.compile($('#footer-template').html());
+    		var footerTemplateHtml = document.getElementById('footer-template').innerHTML;
+    		this.footerTemplate = Handlebars.compile(footerTemplateHtml);
+      
 			this.bindEvents();
 
-      new Router({
-				'/:filter': function (filter) {
-					this.filter = filter;
-					this.render();
-				}.bind(this)
-			}).init('/all');      
+			new Router({
+						'/:filter': function (filter) {
+							this.filter = filter;
+							this.render();
+						}.bind(this)
+					}).init('/all');      
 		},
 		getId: function(id) {
 			return document.getElementById(id);
@@ -277,9 +283,9 @@ jQuery(function ($) {
 			// var el = e.target;
 			// var $el = $(el);
 			// var val = $el.val().trim();
-      var el = e.target
-      var targetValue = el.value
-      var val = targetValue.trim()
+      		var el = e.target
+      		var targetValue = el.value
+      		var val = targetValue.trim()
 		
 			// if edited as empty, DESTROY IT !
 			if (!val) {
