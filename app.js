@@ -95,14 +95,16 @@ jQuery(function ($) {
                 } else {
                     return;
                 }
-            }, false)
+			}, false)
+			
             this.getId('todo-list').addEventListener('focusout', function(e){
                 if(e.target.className === 'edit') {
                     e.target.addEventListener('focusout', App.update(e), false)
                 } else {
                     return;
                 }
-            })
+			})
+			
             this.getId('todo-list').addEventListener('click', function(e) {
                 if(e.target.className === 'destroy') {
                     e.target.addEventListener('click', App.destroy(e), false)
@@ -110,7 +112,7 @@ jQuery(function ($) {
                     return;
                 }
             }, false)
-    },
+    	},
 		// $('#todo-list')
 		// .on('change', '.toggle', this.toggle.bind(this))
 		// .on('dblclick', 'label', this.edit.bind(this))
@@ -135,7 +137,21 @@ jQuery(function ($) {
 			};
 
 			$('#toggle-all').prop('checked', this.getActiveTodos().length === 0);
+// GOAL : if active todos === 0, document.getElementById('toggle-all').attributes.id.ownerElement.checked must be true
+      // var toggeAllBoolValue = document.getElementById('toggle-all').attributes.id.ownerElement.checked
+      // console.log(toggeAllBoolValue); // debugging
+      // console.log(this.getActiveTodos().length); // debugging
+      
+			// if(App.getActiveTodos().length === 0) {
+			// console.log(App.getActiveTodos().length);
+			// 	this.getId('toggle-all').setAttribute("checked", true)}
+        
+        // console.log(toggeAllBoolValue);
 
+      // else if (this.getActiveTodos().length !== 0) {this.getId('toggle-all').setAttribute("checked", false)
+      // }
+      
+			
 			this.renderFooter();
 			// $('#new-todo').focus();
 			this.getId('new-todo').focus();
@@ -151,13 +167,29 @@ jQuery(function ($) {
 				filter: this.filter
 			});
 
-			$('#footer').toggle(todoCount > 0).html(template);
-		},
+			// $('#footer').toggle(todoCount > 0).html(template);
+      if(this.todos.length > 0) {
+        this.getId('footer').innerHTML = '';
+				this.getId('footer').setAttribute("style", "display: block");
+        this.getId('footer').insertAdjacentHTML('afterbegin', template);
+			} else {
+        this.getId('footer').setAttribute("style", "display: none");
+      };
+    },
+      // this.getId('footer').innerHTML = '';
+		  // if(todoCount > 0) {
+		  // this.getId('footer').insertAdjacentHTML('afterbegin', this.template);
+		  // }
+		  // }
 		toggleAll: function (e) {
-			var isChecked = $(e.target).prop('checked');
-
-			this.todos.forEach(function (todo) {
-				todo.completed = isChecked;
+			// var isChecked = $(e.target).prop('checked');
+      
+      // var eVal = e.target.attributes.id.ownerElement.checked;
+      // var isChecked = !Boolean(eVal);
+    	var isChecked = e.target.attributes.id.ownerElement.checked;
+			
+    	this.todos.forEach(function (todo) {
+    	todo.completed = isChecked;
 			});
 
 			this.render();
@@ -204,10 +236,10 @@ jQuery(function ($) {
 			}
 		},
         create: function (e) {
-                var targetEl = e.target
+            var targetEl = e.target
                 // var newTodoId = document.getElementById('new-todo');
-                var iDvalue = targetEl.value;
-                var val = iDvalue.trim();
+            var iDvalue = targetEl.value;
+            var val = iDvalue.trim();
 
             if (e.which !== ENTER_KEY || !val) {
             return;
