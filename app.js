@@ -55,9 +55,9 @@ jQuery(function ($) {
 		getId: function(id) {
 			return document.getElementById(id);
 		},
-        getClass: function(elClass) {
-			return document.getElementsByClassName(elClass);
-		},
+        // getClass: function(elClass) {
+		// 	return document.getElementsByClassName(elClass);
+		// },
 		bindEvents: function () {
 			// $('#new-todo').on('keyup', this.create.bind(this));
             this.getId('new-todo').addEventListener('keyup', this.create.bind(this), false);
@@ -214,8 +214,9 @@ jQuery(function ($) {
 		// returns the corresponding index in the `todos` array
 		indexFromEl: function (e) {
 			// var id = $(el).closest('li').data('id');
+      // var id = e.target.closest('li').getAttribute('data-id');
       		var myLi = e.closest('li') 
-      		var id = myLi.getAttribute('data-id');
+      		var id = myLi.getAttribute('data-id')
 			var todos = this.todos;
 			var i = todos.length;
 
@@ -273,18 +274,23 @@ jQuery(function ($) {
 			}
 		},
 		update: function (e) {
-			var el = e.target;
-			var $el = $(el);
-			var val = $el.val().trim();
-
+			// var el = e.target;
+			// var $el = $(el);
+			// var val = $el.val().trim();
+      var el = e.target
+      var targetValue = el.value
+      var val = targetValue.trim()
+		
+			// if edited as empty, DESTROY IT !
 			if (!val) {
 				this.destroy(e);
 				return;
 			}
-
-			if ($el.data('abort')) {
-				$el.data('abort', false);
-			} else {
+			// if no modification, target equals data stored 
+			if (this.todos[this.indexFromEl(el)].title === val) {
+				this.todos[this.indexFromEl(el)].title = val;
+			// if modified, val equals to the target
+			} else if(this.todos[this.indexFromEl(el)].title !== val) {
 				this.todos[this.indexFromEl(el)].title = val;
 			}
 
