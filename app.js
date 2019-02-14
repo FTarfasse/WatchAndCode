@@ -66,7 +66,6 @@ jQuery(function ($) {
 			// $('#footer').on('click', '#clear-completed', this.destroyCompleted.bind(this));
 		    this.getId('footer').addEventListener('click', function(e){
 				if(e.target.id === 'clear-completed') {
-                    // App.getId('clear-completed').addEventListener('click', App.destroyCompleted(e), false)
                     e.target.addEventListener('click', App.destroyCompleted(e), false)
 				} else {
 					return;
@@ -137,11 +136,11 @@ jQuery(function ($) {
 			};
 
 			// $('#toggle-all').prop('checked', this.getActiveTodos().length === 0);
-// GOAL : if active todos === 0, document.getElementById('toggle-all').attributes.id.ownerElement.checked must be true
-      if(this.getActiveTodos().length === 0) {
-         document.getElementById('toggle-all').attributes.id.ownerElement.checked = true;
-      } else {document.getElementById('toggle-all').attributes.id.ownerElement.checked = false;
-      };
+			// GOAL : if active todos === 0, document.getElementById('toggle-all').attributes.id.ownerElement.checked must be true
+			if(this.getActiveTodos().length === 0) {
+				document.getElementById('toggle-all').attributes.id.ownerElement.checked = true;
+			} else {document.getElementById('toggle-all').attributes.id.ownerElement.checked = false;
+			};
       
 			this.renderFooter();
 			// $('#new-todo').focus();
@@ -159,13 +158,13 @@ jQuery(function ($) {
 			});
 
 			// $('#footer').toggle(todoCount > 0).html(template);
-      if(this.todos.length > 0) {
-        this.getId('footer').innerHTML = '';
-				this.getId('footer').setAttribute("style", "display: block");
-        this.getId('footer').insertAdjacentHTML('afterbegin', template);
-			} else {
-        this.getId('footer').setAttribute("style", "display: none");
-      };
+      		if(this.todos.length > 0) {
+      		  this.getId('footer').innerHTML = '';
+						this.getId('footer').setAttribute("style", "display: block");
+      		  this.getId('footer').insertAdjacentHTML('afterbegin', template);
+					} else {
+      		  this.getId('footer').setAttribute("style", "display: none");
+      		};
     },
       // this.getId('footer').innerHTML = '';
 		  // if(todoCount > 0) {
@@ -175,12 +174,12 @@ jQuery(function ($) {
 		toggleAll: function (e) {
 			// var isChecked = $(e.target).prop('checked');
       
-      // var eVal = e.target.attributes.id.ownerElement.checked;
-      // var isChecked = !Boolean(eVal);
-    	var isChecked = e.target.attributes.id.ownerElement.checked;
-			
-    	this.todos.forEach(function (todo) {
-    	todo.completed = isChecked;
+      	// var eVal = e.target.attributes.id.ownerElement.checked;
+      	// var isChecked = !Boolean(eVal);
+    		var isChecked = e.target.attributes.id.ownerElement.checked;
+
+    		this.todos.forEach(function (todo) {
+    		todo.completed = isChecked;
 			});
 
 			this.render();
@@ -215,8 +214,8 @@ jQuery(function ($) {
 		// returns the corresponding index in the `todos` array
 		indexFromEl: function (e) {
 			// var id = $(el).closest('li').data('id');
-      var myLi = e.closest('li') 
-      var id = myLi.getAttribute('data-id');
+      		var myLi = e.closest('li') 
+      		var id = myLi.getAttribute('data-id');
 			var todos = this.todos;
 			var i = todos.length;
 
@@ -264,12 +263,12 @@ jQuery(function ($) {
 
 			if (e.which === ESCAPE_KEY) {
 				// $(e.target).data('abort', true).blur();
-        // e.target.value = null;
+        		// e.target.value = null;
 				// e.target.value = this.todos[this.indexFromEl(e)].title;
-        // e.target.value = null;
-        // e.target.value = this.todos[this.indexFromEl(e)].title;
-        // e.value = this.todos[this.indexFromEl(e.target)].title;
-                e.target.value = this.todos[this.indexFromEl(e.target)].title;
+        		// e.target.value = null;
+        		// e.target.value = this.todos[this.indexFromEl(e)].title;
+        		// e.value = this.todos[this.indexFromEl(e.target)].title;
+            	e.target.value = this.todos[this.indexFromEl(e.target)].title;
 				e.target.blur();
 			}
 		},
