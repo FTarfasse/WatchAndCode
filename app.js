@@ -171,17 +171,17 @@
 					} else {
       		  this.getId('footer').setAttribute("style", "display: none");
       		};
-    },
-      // this.getId('footer').innerHTML = '';
-		  // if(todoCount > 0) {
-		  // this.getId('footer').insertAdjacentHTML('afterbegin', this.template);
-		  // }
-		  // }
+    	},
+      		// this.getId('footer').innerHTML = '';
+			// if(todoCount > 0) {
+			// this.getId('footer').insertAdjacentHTML('afterbegin', this.template);
+			// }
+			// }
 		toggleAll: function (e) {
 			// var isChecked = $(e.target).prop('checked');
-      
-      	// var eVal = e.target.attributes.id.ownerElement.checked;
-      	// var isChecked = !Boolean(eVal);
+			
+      		// var eVal = e.target.attributes.id.ownerElement.checked;
+      		// var isChecked = !Boolean(eVal);
     		var isChecked = e.target.attributes.id.ownerElement.checked;
 
     		this.todos.forEach(function (todo) {
