@@ -136,22 +136,13 @@ jQuery(function ($) {
 				this.getId('main').setAttribute("style", "display: block");
 			};
 
-			$('#toggle-all').prop('checked', this.getActiveTodos().length === 0);
+			// $('#toggle-all').prop('checked', this.getActiveTodos().length === 0);
 // GOAL : if active todos === 0, document.getElementById('toggle-all').attributes.id.ownerElement.checked must be true
-      // var toggeAllBoolValue = document.getElementById('toggle-all').attributes.id.ownerElement.checked
-      // console.log(toggeAllBoolValue); // debugging
-      // console.log(this.getActiveTodos().length); // debugging
+      if(this.getActiveTodos().length === 0) {
+         document.getElementById('toggle-all').attributes.id.ownerElement.checked = true;
+      } else {document.getElementById('toggle-all').attributes.id.ownerElement.checked = false;
+      };
       
-			// if(App.getActiveTodos().length === 0) {
-			// console.log(App.getActiveTodos().length);
-			// 	this.getId('toggle-all').setAttribute("checked", true)}
-        
-        // console.log(toggeAllBoolValue);
-
-      // else if (this.getActiveTodos().length !== 0) {this.getId('toggle-all').setAttribute("checked", false)
-      // }
-      
-			
 			this.renderFooter();
 			// $('#new-todo').focus();
 			this.getId('new-todo').focus();
@@ -224,8 +215,8 @@ jQuery(function ($) {
 		// returns the corresponding index in the `todos` array
 		indexFromEl: function (e) {
 			// var id = $(el).closest('li').data('id');
-            var myLi = e.closest('li') 
-            var id = myLi.getAttribute('data-id');
+      var myLi = e.closest('li') 
+      var id = myLi.getAttribute('data-id');
 			var todos = this.todos;
 			var i = todos.length;
 
